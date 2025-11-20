@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeSidebar = document.getElementById('close-sidebar');
     const timelineContainer = document.getElementById('timeline-container');
 
-    // 1. Theme Handling
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        body.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
-    }
+    // 1. Theme Handling (Updated to default Dark Mode)
+    // If no theme is saved, default to 'dark'
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    
+    body.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
 
     themeToggle.addEventListener('click', () => {
         const currentTheme = body.getAttribute('data-theme');
@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateThemeIcon(theme) {
         const icon = themeToggle.querySelector('i');
         if (theme === 'dark') {
-            icon.className = 'fa-solid fa-sun';
+            icon.className = 'fa-solid fa-sun'; // Show Sun icon in Dark Mode
         } else {
-            icon.className = 'fa-solid fa-moon';
+            icon.className = 'fa-solid fa-moon'; // Show Moon icon in Light Mode
         }
     }
 
@@ -70,13 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'event-card';
             
-            // Animation delay based on index
-            card.style.transitionDelay = `${index * 0.1}s`;
+            // Staggered animation delay
+            card.style.transitionDelay = `${index * 0.05}s`;
 
+            // Updated HTML structure for the new design
             card.innerHTML = `
                 <div class="content">
-                    <span class="event-icon">${event.icon}</span>
-                    <span class="year-badge">${event.year} | تەمەن: ${event.age}</span>
+                    <div class="card-header">
+                        <span class="event-icon">${event.icon}</span>
+                        <span class="year-badge">${event.year} | ${event.age}</span>
+                    </div>
                     <h3>${event.title}</h3>
                     <p>${event.description}</p>
                 </div>
@@ -96,9 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    // Optional: Stop observing after it becomes visible once
+                    // observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.1 }); // Trigger when 10% of the card is visible
 
         cards.forEach(card => observer.observe(card));
     }
