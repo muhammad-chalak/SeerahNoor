@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیرەی پێغەمبەر ﷺ</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">سیرەی نوور <span>ﷺ</span></div>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="icon-btn" aria-label="گۆڕینی دۆخ"><i class="fa-solid fa-moon"></i></button>
+                <button id="menu-toggle" class="icon-btn" aria-label="لیست"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Right Sidebar Menu -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>لیستی بابەتەکان</h3>
+            <button id="close-sidebar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#hero" class="active"><i class="fa-solid fa-home"></i> سەرەتا</a></li>
+            <li><a href="#timeline"><i class="fa-solid fa-stream"></i> ڕووداوەکان</a></li>
+            <li><a href="#about"><i class="fa-solid fa-info-circle"></i> دەربارە</a></li>
+        </ul>
+    </aside>
+
+    <!-- Hero Section -->
+    <header class="hero" id="hero">
+        <div class="hero-content">
+            <h1 id="hero-title">بارکردن...</h1>
+            <p id="hero-subtitle">...</p>
+            <a href="#timeline" class="cta-btn">دەستپێکردن <i class="fa-solid fa-arrow-down"></i></a>
+        </div>
+        <div class="hero-decoration">
+            <div class="circle c1"></div>
+            <div class="circle c2"></div>
+        </div>
+    </header>
+
+    <!-- Timeline Section -->
+    <main class="container" id="timeline">
+        <div class="section-header">
+            <h2>تایمڵاینی ژیان</h2>
+            <div class="divider"></div>
+        </div>
+        
+        <div class="timeline-wrapper" id="timeline-container">
+            <!-- Events will be injected here via JS -->
+            <div class="loader"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p id="footer-text">...</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

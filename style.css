@@ -1,0 +1,461 @@
+/* Import Kurdish Font (Using Google Fonts Noto Naskh Arabic as fallback or local font preferred) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&display=swap');
+
+:root {
+    /* Light Theme Colors */
+    --primary-color: #10b981; /* Emerald Green */
+    --secondary-color: #059669;
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --border-color: #e5e7eb;
+    --accent-gold: #fbbf24;
+    --font-family: 'Noto Naskh Arabic', sans-serif;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme Colors */
+    --primary-color: #34d399;
+    --secondary-color: #10b981;
+    --bg-color: #111827;
+    --card-bg: #1f2937;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --border-color: #374151;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+
+[data-theme="dark"] .navbar {
+    background: rgba(31, 41, 55, 0.8);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.logo span {
+    color: var(--accent-gold);
+    font-size: 1.8rem;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 15px;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.icon-btn:hover {
+    background: rgba(128, 128, 128, 0.1);
+    color: var(--primary-color);
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100%;
+    background: var(--card-bg);
+    z-index: 1002;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    margin-bottom: 15px;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.sidebar-menu a i {
+    margin-left: 10px;
+    width: 25px;
+    color: var(--primary-color);
+}
+
+.sidebar-menu a:hover {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--primary-color);
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.hero-content {
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards 0.2s;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards 0.4s;
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 0;
+    animation: fadeInUp 0.8s forwards 0.6s;
+}
+
+.cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+}
+
+.hero-decoration .circle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--primary-color);
+    opacity: 0.05;
+}
+
+.c1 { width: 300px; height: 300px; top: -50px; right: -50px; }
+.c2 { width: 500px; height: 500px; bottom: -100px; left: -100px; }
+
+/* Timeline */
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: var(--text-main);
+}
+
+.divider {
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+.timeline-wrapper {
+    position: relative;
+    padding: 20px 0;
+}
+
+/* The Line */
+.timeline-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 50%;
+    width: 4px;
+    background: var(--border-color);
+    transform: translateX(50%);
+}
+
+.event-card {
+    position: relative;
+    width: 50%;
+    padding: 0 40px;
+    margin-bottom: 50px;
+    opacity: 0; /* For JS animation */
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.event-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Right Side Cards (Even) */
+.event-card:nth-child(even) {
+    right: 0;
+    text-align: right;
+}
+
+/* Left Side Cards (Odd) */
+.event-card:nth-child(odd) {
+    right: 50%;
+    text-align: left;
+}
+
+/* Fix text alignment for RTL layout visually */
+.event-card:nth-child(odd) .content {
+    text-align: right; /* Keep text RTL inside the card */
+}
+
+/* Dot on the line */
+.event-card::after {
+    content: '';
+    position: absolute;
+    top: 25px;
+    right: -10px; /* Adjust based on side */
+    width: 20px;
+    height: 20px;
+    background: var(--card-bg);
+    border: 4px solid var(--primary-color);
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.event-card:nth-child(odd)::after {
+    right: -10px; /* Since it's RTL base, logic flips */
+    left: auto;
+}
+/* Wait, let's simplify RTL Timeline logic. 
+   In RTL mode: 
+   Item 1 (Right): margin-right: 50% ? No.
+   We need a specific structure. Let's use simple Flex logic in CSS or just absolute positioning adjustments.
+*/
+
+/* Correct RTL Timeline Logic */
+.event-card:nth-child(odd) {
+    margin-right: 50%; /* Push to left side */
+    padding-left: 0;
+    padding-right: 40px;
+}
+.event-card:nth-child(odd)::after {
+    right: -12px; /* Center on line */
+}
+
+.event-card:nth-child(even) {
+    margin-right: 0; /* Stay on right side */
+    padding-right: 0;
+    padding-left: 40px; /* Push content in */
+    width: 50%;
+}
+.event-card:nth-child(even)::after {
+    right: calc(100% - 10px); /* Position on the line at the left edge of this card */
+}
+
+.content {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    position: relative;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s;
+}
+
+.content:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.year-badge {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.event-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.content h3 {
+    color: var(--text-main);
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.content p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 40px;
+    background: var(--card-bg);
+    margin-top: 50px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+
+/* Loader */
+.loader {
+    border: 5px solid var(--border-color);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 50px auto;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .timeline-wrapper::before {
+        right: 30px;
+    }
+    
+    .event-card {
+        width: 100%;
+        padding-right: 70px !important; /* Space for line on right */
+        padding-left: 0 !important;
+        margin-right: 0 !important;
+        text-align: right !important;
+    }
+    
+    .event-card:nth-child(odd), .event-card:nth-child(even) {
+        right: auto;
+        left: auto;
+    }
+
+    .event-card::after {
+        right: 21px !important; /* Align with line */
+        left: auto !important;
+    }
+
+    .hero h1 { font-size: 2.5rem; }
+}
