@@ -1,4 +1,4 @@
-/* Import Kurdish Font (Using Google Fonts Noto Naskh Arabic as fallback or local font preferred) */
+/* Import Kurdish Font */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&display=swap');
 
 :root {
@@ -238,16 +238,16 @@ body {
 .c1 { width: 300px; height: 300px; top: -50px; right: -50px; }
 .c2 { width: 500px; height: 500px; bottom: -100px; left: -100px; }
 
-/* Timeline */
+/* --- NEW TIMELINE STYLES (UPDATED) --- */
 .container {
-    max-width: 1000px;
+    max-width: 900px; /* Optimized width for card view */
     margin: 50px auto;
     padding: 20px;
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .section-header h2 {
@@ -265,27 +265,21 @@ body {
 
 .timeline-wrapper {
     position: relative;
-    padding: 20px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* The Line */
+/* Removing the center line */
 .timeline-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 50%;
-    width: 4px;
-    background: var(--border-color);
-    transform: translateX(50%);
+    display: none;
 }
 
 .event-card {
     position: relative;
-    width: 50%;
-    padding: 0 40px;
-    margin-bottom: 50px;
-    opacity: 0; /* For JS animation */
+    width: 100%; /* Full Width */
+    opacity: 0;
     transform: translateY(30px);
     transition: all 0.6s ease-out;
 }
@@ -295,108 +289,73 @@ body {
     transform: translateY(0);
 }
 
-/* Right Side Cards (Even) */
-.event-card:nth-child(even) {
-    right: 0;
-    text-align: right;
-}
-
-/* Left Side Cards (Odd) */
-.event-card:nth-child(odd) {
-    right: 50%;
-    text-align: left;
-}
-
-/* Fix text alignment for RTL layout visually */
-.event-card:nth-child(odd) .content {
-    text-align: right; /* Keep text RTL inside the card */
-}
-
-/* Dot on the line */
+/* Removing the timeline dots */
 .event-card::after {
-    content: '';
-    position: absolute;
-    top: 25px;
-    right: -10px; /* Adjust based on side */
-    width: 20px;
-    height: 20px;
-    background: var(--card-bg);
-    border: 4px solid var(--primary-color);
-    border-radius: 50%;
-    z-index: 10;
-}
-
-.event-card:nth-child(odd)::after {
-    right: -10px; /* Since it's RTL base, logic flips */
-    left: auto;
-}
-/* Wait, let's simplify RTL Timeline logic. 
-   In RTL mode: 
-   Item 1 (Right): margin-right: 50% ? No.
-   We need a specific structure. Let's use simple Flex logic in CSS or just absolute positioning adjustments.
-*/
-
-/* Correct RTL Timeline Logic */
-.event-card:nth-child(odd) {
-    margin-right: 50%; /* Push to left side */
-    padding-left: 0;
-    padding-right: 40px;
-}
-.event-card:nth-child(odd)::after {
-    right: -12px; /* Center on line */
-}
-
-.event-card:nth-child(even) {
-    margin-right: 0; /* Stay on right side */
-    padding-right: 0;
-    padding-left: 40px; /* Push content in */
-    width: 50%;
-}
-.event-card:nth-child(even)::after {
-    right: calc(100% - 10px); /* Position on the line at the left edge of this card */
+    display: none;
 }
 
 .content {
     background: var(--card-bg);
-    padding: 25px;
-    border-radius: 15px;
+    padding: 30px;
+    border-radius: 16px;
     box-shadow: var(--shadow);
-    position: relative;
     border: 1px solid var(--border-color);
-    transition: transform 0.3s;
+    transition: transform 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: right;
 }
 
 .content:hover {
     transform: translateY(-5px);
     border-color: var(--primary-color);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 
-.year-badge {
-    display: inline-block;
-    background: var(--primary-color);
-    color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .event-icon {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    display: block;
+    font-size: 2.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--primary-color);
+}
+
+.year-badge {
+    background: var(--primary-color);
+    color: white;
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
 }
 
 .content h3 {
     color: var(--text-main);
     margin-bottom: 10px;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+    width: 100%;
 }
 
 .content p {
     color: var(--text-muted);
-    font-size: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
 }
 
 /* Footer */
@@ -434,28 +393,21 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-    .timeline-wrapper::before {
-        right: 30px;
+@media (max-width: 600px) {
+    .content {
+        padding: 20px;
     }
-    
-    .event-card {
-        width: 100%;
-        padding-right: 70px !important; /* Space for line on right */
-        padding-left: 0 !important;
-        margin-right: 0 !important;
-        text-align: right !important;
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
     }
-    
-    .event-card:nth-child(odd), .event-card:nth-child(even) {
-        right: auto;
-        left: auto;
+    .event-icon {
+        margin-bottom: 10px;
     }
-
-    .event-card::after {
-        right: 21px !important; /* Align with line */
-        left: auto !important;
+    .year-badge {
+        align-self: flex-start;
     }
-
-    .hero h1 { font-size: 2.5rem; }
+    .hero h1 { 
+        font-size: 2.5rem; 
+    }
 }
